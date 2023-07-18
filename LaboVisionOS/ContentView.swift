@@ -10,20 +10,26 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
+    @State private var selectedSphere: Sphere? = .red
+
     var body: some View {
         NavigationSplitView {
-            List {
-                Text("Item")
+            List(Sphere.allCases, selection: $selectedSphere) { sphere in
+                Text(sphere.title)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        selectedSphere = sphere
+                    }
             }
-            .navigationTitle("Sidebar")
+            .navigationTitle("Spheres")
         } detail: {
             VStack {
-                Model3D(named: "Scene", bundle: realityKitContentBundle)
+                Model3D(named: selectedSphere?.modelName ?? "", bundle: realityKitContentBundle)
                     .padding(.bottom, 50)
 
-                Text("Hello, world!")
+                Text(selectedSphere?.description ?? "")
             }
-            .navigationTitle("Content")
+            .navigationTitle("Sphere")
             .padding()
         }
     }
