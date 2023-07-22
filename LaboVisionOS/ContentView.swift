@@ -10,24 +10,31 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
-    @State private var selectedSphere: Sphere? = .red
+    @Environment(AppViewModel.self) private var appViewModel
 
     var body: some View {
+        @Bindable var appViewModel = appViewModel
+
         NavigationSplitView {
-            List(Sphere.allCases, selection: $selectedSphere) { sphere in
+            List(Sphere.allCases, selection: $appViewModel.selectedSphere) { sphere in
                 Text(sphere.title)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        selectedSphere = sphere
+                        appViewModel.selectedSphere = sphere
                     }
             }
             .navigationTitle("Spheres")
         } detail: {
             VStack {
-                Model3D(named: selectedSphere?.modelName ?? "", bundle: realityKitContentBundle)
+                Model3D(named: appViewModel.selectedSphere?.modelName ?? "", bundle: realityKitContentBundle)
                     .padding(.bottom, 50)
 
-                Text(selectedSphere?.description ?? "")
+                Text(appViewModel.selectedSphere?.description ?? "")
+                WindowToggle(
+                    title: "別ウィンドウで表示",
+                    id: appViewModel.windowGroupModelDetail,
+                    isShowing: $appViewModel.isShowingModelDetail
+                )
             }
             .navigationTitle("Sphere")
             .padding()
