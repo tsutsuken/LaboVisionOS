@@ -1,46 +1,51 @@
 //
-//  Sphere.swift
+//  SceneObject.swift
 //  LaboVisionOS
 //
 //  Created by Ken Tsutsumi on 2023/07/18.
 //
 
 import Foundation
+import RealityKitContent
 
-enum Sphere: String, Identifiable, CaseIterable {
-    case red, blue, yellow
+enum SceneObject: String, Identifiable, CaseIterable {
+    case redSphere, blueSphere, yellowSphere
     var id: Self { self }
 
     var title: String {
         switch self {
-        case .red:
+        case .redSphere:
             return "Red"
-        case .blue:
+        case .blueSphere:
             return "Blue"
-        case .yellow:
+        case .yellowSphere:
             return "Yellow"
         }
     }
 
     var description: String {
         switch self {
-        case .red:
+        case .redSphere:
             return "This is red sphere"
-        case .blue:
+        case .blueSphere:
             return "This is blue sphere"
-        case .yellow:
+        case .yellowSphere:
             return "This is yellow sphere"
         }
     }
 
     var modelName: String {
         switch self {
-        case .red:
+        case .redSphere:
             return "Sphere_Red"
-        case .blue:
+        case .blueSphere:
             return "Sphere_Blue"
-        case .yellow:
+        case .yellowSphere:
             return "Sphere_Yellow"
         }
+    }
+
+    var bundle: Bundle? {
+        return realityKitContentBundle
     }
 }

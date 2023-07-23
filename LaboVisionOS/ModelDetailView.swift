@@ -15,7 +15,7 @@ struct ModelDetailView: View {
     var body: some View {
         VStack {
             RealityView { content in
-                if let scene = try? await Entity(named: appViewModel.selectedSphere?.modelName ?? "", in: realityKitContentBundle) {
+                if let scene = try? await Entity(named: appViewModel.selectedSphere?.modelName ?? "", in: appViewModel.selectedSphere?.bundle) {
                     content.add(scene)
                 }
             }

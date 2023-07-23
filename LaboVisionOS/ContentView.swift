@@ -16,7 +16,7 @@ struct ContentView: View {
         @Bindable var appViewModel = appViewModel
 
         NavigationSplitView {
-            List(Sphere.allCases, selection: $appViewModel.selectedSphere) { sphere in
+            List(SceneObject.allCases, selection: $appViewModel.selectedSphere) { sphere in
                 Text(sphere.title)
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -26,7 +26,7 @@ struct ContentView: View {
             .navigationTitle("Spheres")
         } detail: {
             VStack {
-                Model3D(named: appViewModel.selectedSphere?.modelName ?? "", bundle: realityKitContentBundle)
+                Model3D(named: appViewModel.selectedSphere?.modelName ?? "", bundle: appViewModel.selectedSphere?.bundle)
                     .padding(.bottom, 50)
 
                 Text(appViewModel.selectedSphere?.description ?? "")

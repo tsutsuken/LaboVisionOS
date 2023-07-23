@@ -12,5 +12,5 @@ import Observation
 class AppViewModel {
     var isShowingModelDetail: Bool = false
     let windowGroupModelDetail = "WindowGroupModelDetail"
-    var selectedSphere: Sphere? = .red
+    var selectedSphere: SceneObject? = .redSphere
 }
