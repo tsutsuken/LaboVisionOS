@@ -45,6 +45,17 @@ enum SceneObject: String, Identifiable, CaseIterable {
         }
     }
 
+    var thumbnailPath: String {
+        switch self {
+        case .redSphere:
+            return "RedSphere"
+        case .blueSphere:
+            return "BlueSphere"
+        case .yellowSphere:
+            return "YellowSphere"
+        }
+    }
+
     var bundle: Bundle? {
         return realityKitContentBundle
     }
